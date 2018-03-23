@@ -11,26 +11,22 @@
 #include "stack.h"
 
 using namespace std;
-
 void Input(string &start,string &end);
 Vector<string> Show(string start,string end,Lexicon lex);
+Lexicon ParseFile(string &file);
+
 //int Search(string &word,vector<string> &dic);
 
 int main() {
     string start,end;
     string file;
+    Lexicon lexicon;
+    Vector<string> wordLadder;
+
     cout << "Please give me two English words, and I will change the first into the second by changing one letter at a time."
-         << endl;
-    cout << "Dictionary file name?";
+         << "Dictionary file name?" << endl;
     cin >> file;
-    try{
-        Lexicon lex(file);
-    }catch (ErrorException &ex){
-        cout << "Unable to open that file." << "Try again." << endl;
-        cout << "Dictionary file name?";
-        cin >> file;
-    }
-    Lexicon lex(file);
+    lexicon = ParseFile(file);
     Input(start,end);
     if(start==end){
         cout << "The two words must be different." << endl;
@@ -38,15 +34,14 @@ int main() {
     }else if(start.length()!=end.length()){
         cout << "The two words must be the same length." << endl;
         Input(start,end);
-    }else if(!lex.contains(start)&&!lex.contains(end)){
+    }else if(!lexicon.contains(start)&&!lexicon.contains(end)){
         cout << "not fount" << endl;
         Input(start,end);
     }else {
         cout << "A ladder from data back to code:" << endl;
         cout << "Word ladder: " << endl;
 
-        Vector<string> wordLadder;
-        wordLadder = Show(start,end,lex);
+        wordLadder = Show(start,end,lexicon);
         if(!wordLadder.isEmpty()){
             for(auto word : wordLadder){
                 cout << word << " " << endl;
@@ -65,6 +60,18 @@ void Input(string &start,string &end){
     cin >> start;
     cout << "Word #2 (or Enter to quit):" << endl;
     cin >> end;
+}
+
+Lexicon ParseFile(string &file){
+    try{
+        Lexicon lex(file);
+    }catch (ErrorException &ex){
+        cout << "Unable to open that file." << "Try again." << endl;
+        cout << "Dictionary file name?";
+        cin >> file;
+    }
+    Lexicon lex(file);
+    return lex;
 }
 
 Vector<string> Show(string start,string end,Lexicon lex){
