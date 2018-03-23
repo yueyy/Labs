@@ -15,8 +15,6 @@ void Input(string &start,string &end);
 Vector<string> Show(string start,string end,Lexicon lex);
 Lexicon ParseFile(string &file);
 
-//int Search(string &word,vector<string> &dic);
-
 int main() {
     string start,end;
     string file;
@@ -95,7 +93,6 @@ Vector<string> Show(string start,string end,Lexicon lex){
         if (last == end){
             return current;
         }else{
-
             int flag = 0;
             while(flag<start.length()){
                 for(char c = 'a';c<='z';c++){
@@ -118,21 +115,3 @@ Vector<string> Show(string start,string end,Lexicon lex){
     Vector<string> notfound(1,"please try again");
     return notfound;
 }
-
-// 二分法
-//int Search(string &word,vector<string> &dic){
-//    int left = 0;
-//    int right = dic.size()-1;
-
-//    while (left < right){
-//        int middle = (left + right )/2;
-//        if (word < dic[middle]){
-//            right = middle - 1;
-//        }else if (word > dic[middle]){
-//            left = middle + 1;
-//        }else{
-//            return middle;
-//        }
-//    }
-//    return -1;
-//}
