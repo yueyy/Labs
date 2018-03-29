@@ -15,7 +15,7 @@ using namespace std;
 
 int gcd(int a, int b) {
     cout << "gcd(" << a << ", " << b << ") = " ;
-    if(b==0){
+    if(b == 0){
         cout << a << endl;
     }else{
         int c = a;
@@ -29,7 +29,9 @@ int gcd(int a, int b) {
 }
 
 void serpinskii(GWindow &w, int leftX, int leftY, int size, int order) {
-    // your code here
+    if(order < 0){
+        throw
+    }
     cout << "[recursion serpinskii called]" << endl;
 }
 
